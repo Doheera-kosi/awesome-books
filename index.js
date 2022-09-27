@@ -9,9 +9,7 @@ const note = document.querySelector('#note');
 const dataVal = () => {
   if (title.value === '' || author.value === '') {
     note.innerHTML = 'Please fields can not be blank';
-    // console.log('failure');
   } else {
-    // console.log('success');
     note.innerHTML = '';
     // eslint-disable-next-line no-use-before-define
     recieveFieldsData();
@@ -20,7 +18,6 @@ const dataVal = () => {
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  // console.log('button clicked');
   dataVal();
 });
 
@@ -49,7 +46,6 @@ const deleteBook = (e) => {
 const recieveFieldsData = () => {
   data.title = title.value;
   data.author = author.value;
-  // console.log(data);
 
   // callingg addNew and Delete Function here
   // eslint-disable-next-line no-use-before-define
@@ -98,6 +94,5 @@ window.onload = () => {
   renderData();
 };
 
-window.localStorage.setItem('data', JSON.stringify(data));
+window.localStorage.setItem('data', JSON.stringify('data'));
 window.localStorage.getItem('data', JSON.stringify('data'));
-// console.log(JSON.parse(newObject));
