@@ -1,98 +1,88 @@
-/* eslint-disable linebreak-style */
-const form = document.querySelector('#form');
-const title = document.querySelector('#title');
-const author = document.querySelector('#author');
-const books = document.querySelector('#books');
-// const book = document.querySelector('#book');
+// Const/variable Declaration And Initialization
+const bookName = document.querySelector('#name');
+const bookAuthor = document.querySelector('#author');
+const newBook = document.querySelector('.newBook');
+const display = document.querySelector('.elements');
 const note = document.querySelector('#note');
-
-const dataVal = () => {
-  if (title.value === '' || author.value === '') {
-    note.innerHTML = 'Please fields can not be blank';
-  } else {
-    note.innerHTML = '';
-    // eslint-disable-next-line no-use-before-define
-    recieveFieldsData();
-  }
-};
-
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  dataVal();
-});
-
-const data = [
+let dataArr = [
   {
-    id: '1',
-    title: 'A Better India: A Better World',
-    author: 'Narayana Murthy',
-  },
-  {
-    id: '2',
-    title: 'A Passage to India',
-    author: 'E. M. Foster',
-  },
-  {
-    id: '3',
-    title: 'Great Expectations',
-    author: 'Charles Dickens',
+    id: new Date().getTime().toString(),
+    book: 'Great Expectations',
+    author: 'Charles Dickins',
   },
 ];
 
-const deleteBook = (e) => {
-  e.parentElement.parentElement.parentElement.remove();
+// Setting Data into LocalStorage Function
+function locStorage() {
+  localStorage.setItem('bookList', JSON.stringify(dataArr));
+}
+
+// Getting Data from LocalStorage to persist on the browser
+if (localStorage.getItem('bookList') === null) {
+  locStorage();
+} else if (JSON.parse(localStorage.getItem('bookList')).length === 0) {
+  locStorage();
+}
+
+// Validating Input Fields Function
+const fieldValidation = () => {
+  if (bookName.value === '' || bookAuthor.value === '') {
+    note.innerHTML = 'Please fields can not be blank';
+  } else {
+    note.innerHTML = '';
+  }
 };
 
-const recieveFieldsData = () => {
-  data.title = title.value;
-  data.author = author.value;
+// Function to Add New Book to Collections
+function addBook() {
+  if (bookName.value !== '' && bookAuthor.value !== '') {
+    dataArr.unshift({
+      id: new Date().getTime().toString(),
+      book: bookName.value,
+      author: bookAuthor.value,
+    });
+    locStorage();
+  } else {
+    // Calling form Validation Function
+    fieldValidation();
+  }
+}
 
-  // callingg addNew and Delete Function here
-  // eslint-disable-next-line no-use-before-define
-  addNewBook();
-  deleteBook();
-};
-
-const addNewBook = () => {
-  books.innerHTML += `
-  <div id='book'>
-    <label for="title">${data.title}</label><br>
-    <label for="author">${data.author}</label>
-    <br><br>
-    <div>
-      Remove
-      <span>
-        <i onClick="deleteBook(this)" class="fas fa-trash-alt"></i>
-      </span>
-    </div>
-    <hr>
-  </div>
-  `;
-  title.value = '';
-  author.value = '';
-};
-
-const renderData = () => {
-  data.forEach((data) => {
-    books.innerHTML += `
-    <div id='book'>
-      <label for="title">${data.title}</label><br>
-      <label for="author">${data.author}</label>
-      <br><br>
-      <div>
-        Remove
-        <span>
-          <i onClick="deleteBook(this)" class="fas fa-trash-alt"></i>
-        </span>
+// Adding Items from Data fields Functoin
+function addItems() {
+  let bookHtml = '';
+  const booksArray = JSON.parse(localStorage.getItem('bookList'));
+  if (booksArray !== null) {
+    dataArr = booksArray;
+    booksArray.forEach((item) => {
+      bookHtml += `
+      <div class=''> <br>
+        <label class='book-name'>${item.book}</label> <br><br>
+        <label class='book-author'>${item.author}</label> <br><br>
+        <button type='button' id=${item.id} onclick='removeBook(this.id)'>Remove <i class='fas fa-trash-alt'></i> </button>
+        <hr>
       </div>
-      <hr>
-    </div>
-    `;
-  });
-};
-window.onload = () => {
-  renderData();
-};
+      `;
+      // Clearing input fields when Add Button is fired
+      bookName.value = '';
+      bookAuthor.value = '';
+    });
+    display.innerHTML = bookHtml;
+  }
+}
+// Returning the Function to work
+addItems();
 
-window.localStorage.setItem('data', JSON.stringify('data'));
-window.localStorage.getItem('data', JSON.stringify('data'));
+// Function to Remove Book from collection
+function removeBook(id) {
+  dataArr = dataArr.filter((e) => e.id !== id);
+  locStorage();
+  addItems();
+}
+removeBook();
+
+// Button OnClick Event Handler
+newBook.addEventListener('click', () => {
+  addBook();
+  addItems();
+});
