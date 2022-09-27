@@ -1,54 +1,61 @@
+/* eslint-disable linebreak-style */
 const form = document.querySelector('#form');
 const title = document.querySelector('#title');
 const author = document.querySelector('#author');
 const books = document.querySelector('#books');
-const book = document.querySelector('#book');
+// const book = document.querySelector('#book');
 const note = document.querySelector('#note');
+
+const dataVal = () => {
+  if (title.value === '' || author.value === '') {
+    note.innerHTML = 'Please fields can not be blank';
+    // console.log('failure');
+  } else {
+    // console.log('success');
+    note.innerHTML = '';
+    // eslint-disable-next-line no-use-before-define
+    recieveFieldsData();
+  }
+};
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  console.log('button clicked');
-
+  // console.log('button clicked');
   dataVal();
-})
+});
 
 const data = [
-  { 
+  {
     id: '1',
     title: 'A Better India: A Better World',
-    author: 'Narayana Murthy'
+    author: 'Narayana Murthy',
   },
   {
     id: '2',
     title: 'A Passage to India',
-    author: 'E. M. Foster'
+    author: 'E. M. Foster',
   },
   {
     id: '3',
     title: 'Great Expectations',
-    author: 'Charles Dickens'
-  }
+    author: 'Charles Dickens',
+  },
 ];
 
+const deleteBook = (e) => {
+  e.parentElement.parentElement.parentElement.remove();
+};
+
 const recieveFieldsData = () => {
-  data['title'] =  title.value
-  data['author'] =  author.value
-  console.log(data);
+  data.title = title.value;
+  data.author = author.value;
+  // console.log(data);
 
-  // callingg addNew Function here
+  // callingg addNew and Delete Function here
+  // eslint-disable-next-line no-use-before-define
   addNewBook();
-}
-
-const dataVal = () => {
-  if(title.value === '' || author.value === '' ) {
-    note.innerHTML = 'Please fields can not be blank'
-    console.log('failure');
-  } else {
-    console.log('success');
-    note.innerHTML = '';
-    recieveFieldsData();
-  }
-}
+  deleteBook();
+};
 
 const addNewBook = () => {
   books.innerHTML += `
@@ -69,10 +76,6 @@ const addNewBook = () => {
   author.value = '';
 };
 
-const deleteBook = (e) => {
-  e.parentElement.parentElement.parentElement.remove();
-}
-
 const renderData = () => {
   data.forEach((data) => {
     books.innerHTML += `
@@ -89,12 +92,12 @@ const renderData = () => {
       <hr>
     </div>
     `;
-  })
-}
+  });
+};
 window.onload = () => {
-  renderData()
-}
+  renderData();
+};
 
-window.localStorage.setItem('data', JSON.stringify(data))
-const newObject = window.localStorage.getItem("data", JSON.stringify('data'));
-console.log(JSON.parse(newObject));
+window.localStorage.setItem('data', JSON.stringify(data));
+window.localStorage.getItem('data', JSON.stringify('data'));
+// console.log(JSON.parse(newObject));
