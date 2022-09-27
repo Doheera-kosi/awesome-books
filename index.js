@@ -1,69 +1,3 @@
-// const bookList = [
-//   // Note the below abbreviation
-//     // bId (Book Id)
-//     // bT (Book Title)
-//     // bT (Book Author)
-//   {
-//     bId: '01',
-//     bT: 'Things Fall Apart',
-//     bA: 'Chinua Achibe' 
-//   },
-//   {
-//     bId: '01',
-//     bT: 'Things Fall Apart',
-//     bA: 'Chinua Achibe' 
-//   },
-//   {
-//     bId: '01',
-//     bT: 'Things Fall Apart',
-//     bA: 'Chinua Achibe' 
-//   },
-//   {
-//     bId: '01',
-//     bT: 'Things Fall Apart',
-//     bA: 'Chinua Achibe' 
-//   },
-//   {
-//     bId: '01',
-//     bT: 'Things Fall Apart',
-//     bA: 'Chinua Achibe' 
-//   },
-// ];
-
-
-// const label = document.querySelector('#label')
-// label.innerHTML = 'I luv Js';
-// document.appendChild(label)
-// document.querySelector('#label').innerHTML = "Hello world"
-
-// let label = document.querySelector('.label')
-// let title = document.querySelector('.title')
-// let author = document.querySelector('.author')
-
-// const data = [
-//   {}
-// ]
-
-// const accept = () => {
-//   data['text'] = input.value;
-//   console.log(data);
-// };
-
-// submit.addEventListener('submit', (e) => {
-//   e.preventDefault();
-//   console.log('button clicked');
-
-//   dataVal();
-// });
-
-// const dataVal = () => {
-//   if (input.value === '') {
-
-//   }else {
-//     accept();
-//   }
-// }
-
 const form = document.querySelector('#form');
 const title = document.querySelector('#title');
 const author = document.querySelector('#author');
@@ -77,7 +11,6 @@ form.addEventListener('submit', (e) => {
 
   dataVal();
 })
-
 
 const data = [
   { 
@@ -126,7 +59,6 @@ const addNewBook = () => {
     <div>
       Remove
       <span>
-        <!-- <i class="fas fa-edit"></i> -->
         <i onClick="deleteBook(this)" class="fas fa-trash-alt"></i>
       </span>
     </div>
@@ -151,7 +83,6 @@ const renderData = () => {
       <div>
         Remove
         <span>
-          <!-- <i class="fas fa-edit"></i> -->
           <i onClick="deleteBook(this)" class="fas fa-trash-alt"></i>
         </span>
       </div>
@@ -164,43 +95,6 @@ window.onload = () => {
   renderData()
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// localStorage.getItem('data');
-// localStorage.setItem('data');
-// const tech = localStorage.getItem(data)
-// console.log(tech);
-
-// localStorage.setItem('profile', JSON.stringify(data))
-// console.log(localStorage.getItem('profile'));
-
-// const proString = localStorage.getItem('profile');
-// console.log('proStrings', proString);
-
-// window.localStorage.setItem('data', JSON.stringify(data));
-// window.localStorage.getItem('data', JSON.stringify(data))
-// window.localStorage.setItem(data, JSON.stringify(data));
-// window.localStorage.getItem(data, JSON.stringify(data));
+window.localStorage.setItem('data', JSON.stringify(data))
+const newObject = window.localStorage.getItem("data", JSON.stringify('data'));
+console.log(JSON.parse(newObject));
