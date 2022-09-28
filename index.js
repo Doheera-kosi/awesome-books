@@ -59,7 +59,7 @@ function addItems() {
       <div class=''> <br>
         <label class='book-name'>${item.book}</label> <br><br>
         <label class='book-author'>${item.author}</label> <br><br>
-        <button type='button' id=${item.id} onclick='removeBook(this.id)'>Remove <i class='fas fa-trash-alt'></i> </button>
+        <button type='button' id=${item.id} onclick='removeBook(this.id)'>Remove <i class='fas fa-trash-alt'></i> </button><br><br>
         <hr>
       </div>
       `;
