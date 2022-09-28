@@ -56,12 +56,15 @@ function addItems() {
     dataArr = booksArray;
     booksArray.forEach((item) => {
       bookHtml += `
-      <div class=''> <br>
-        <label class='book-name'>${item.book}</label> <br><br>
-        <label class='book-author'>${item.author}</label> <br><br>
+      <div class='b-container'>
+        <div class=title-author>
+          <label class='book-name'>" ${item.book} "</label>
+          <div> by </div>
+          <label class='book-author'>${item.author}</label>
+        </div>
         <button type='button' id=${item.id} onclick='removeBook(this.id)'>Remove <i class='fas fa-trash-alt'></i> </button>
-        <hr>
       </div>
+      <hr>
       `;
       // Clearing input fields when Add Button is fired
       bookName.value = '';
