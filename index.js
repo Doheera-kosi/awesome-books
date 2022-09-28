@@ -1,91 +1,119 @@
-// Const/variable Declaration And Initialization
-const bookName = document.querySelector('#name');
-const bookAuthor = document.querySelector('#author');
-const newBook = document.querySelector('.newBook');
-const display = document.querySelector('.elements');
-const note = document.querySelector('#note');
-let dataArr = [
-  {
-    id: new Date().getTime().toString(),
-    book: 'Great Expectations',
-    author: 'Charles Dickins',
-  },
-];
+const bookName = document.querySelector('#title');
+const author = document.querySelector('#author');
+const elements = document.querySelector('#elements');
+const form = document.querySelector('#form');
+const msg = document.querySelector('#msg');
 
-// Setting Data into LocalStorage Function
-function locStorage() {
-  localStorage.setItem('bookList', JSON.stringify(dataArr));
-}
+const navList = document.querySelector('#nav-list');
+const navAdd = document.querySelector('#nav-add');
+const navContact = document.querySelector('#nav-contact');
+const sectionList = document.querySelector('#list');
+const sectionAdd = document.querySelector('#add-book');
+const sectionContact = document.querySelector('#contact');
 
-// Getting Data from LocalStorage to persist on the browser
-if (localStorage.getItem('bookList') === null) {
-  locStorage();
-} else if (JSON.parse(localStorage.getItem('bookList')).length === 0) {
-  locStorage();
-}
 
-// Validating Input Fields Function
-const fieldValidation = () => {
-  if (bookName.value === '' || bookAuthor.value === '') {
-    note.innerHTML = 'Please fields can not be blank';
-  } else {
-    note.innerHTML = '';
-  }
-};
-
-// Function to Add New Book to Collections
-function addBook() {
-  if (bookName.value !== '' && bookAuthor.value !== '') {
-    dataArr.unshift({
-      id: new Date().getTime().toString(),
-      book: bookName.value,
-      author: bookAuthor.value,
-    });
-    locStorage();
-  } else {
-    // Calling form Validation Function
-    fieldValidation();
-  }
-}
-
-// Adding Items from Data fields Functoin
-function addItems() {
+function pushItems() {
   let bookHtml = '';
   const booksArray = JSON.parse(localStorage.getItem('bookList'));
   if (booksArray !== null) {
-    dataArr = booksArray;
-    booksArray.forEach((item) => {
+    booksArray.forEach((item, index) => {
       bookHtml += `
-      <div class='b-container'>
-        <div class=title-author>
-          <label class='book-name'>" ${item.book} "</label>
-          <div> by </div>
-          <label class='book-author'>${item.author}</label>
-        </div>
-        <button type='button' id=${item.id} onclick='removeBook(this.id)'>Remove <i class='fas fa-trash-alt'></i> </button>
-      </div>
-      <hr>
+      <li class='list_item' style="background-color: ${index % 2 && 'rgb(225, 223, 223)'}">
+        <p class="book-name"> "${item.title}" by ${item.author}</p> <br>
+        <button type="button" id=${item.id} onclick="collection.removeBook(this.id)">Remove <i class="fas fa-plus-circle"></i></button>
+      </li>
       `;
-      // Clearing input fields when Add Button is fired
-      bookName.value = '';
-      bookAuthor.value = '';
     });
-    display.innerHTML = bookHtml;
+    elements.innerHTML = bookHtml;
+  };
+};
+
+class Collection {
+  constructor() {
+    this.arr = JSON.parse(localStorage.getItem('bookList'))
+  };
+
+  getBooks() {
+    if (localStorage.getItem('bookList') === null) {
+      this.arr = [];
+    } else {
+      this.arr = JSON.parse(localStorage.getItem('bookList'));
+    }
+  }
+
+  UpdateLocalStorage() {
+    localStorage.setItem('bookList', JSON.stringify(this.arr));
+  }
+
+  addBook() {
+    const bookObject = {
+      id: new Date().getTime().toString(),
+      title: bookName.value,
+      author: author.value,
+    };
+    this.arr.push(bookObject);
+    this.UpdateLocalStorage();
+    pushItems();
+    fieldValidation();
+  }
+
+  setUpArray() {
+    this.arr = JSON.parse(localStorage.getItem('bookList'));
+  }
+
+  removeBook(id) {
+    this.arr = this.arr.filter((e) => e.id !== id);
+    this.UpdateLocalStorage();
+    pushItems();
   }
 }
-// Returning the Function to work
-addItems();
 
-// Function to Remove Book from collection
-function removeBook(id) {
-  dataArr = dataArr.filter((e) => e.id !== id);
-  locStorage();
-  addItems();
+const collection = new Collection();
+
+// Validating Input Fields Function
+const fieldValidation = () => {
+  if (bookName.value === '' || author.value === '') {
+    msg.innerHTML = 'Please fields can not be blank';
+  } else {
+    msg.innerHTML = 'Success!';
+  }
+};
+
+window.onload = () => {
+  collection.getBooks();
 }
-removeBook();
 
-// Button OnClick Event Handler
-newBook.addEventListener('click', () => {
-  addBook();
-  addItems();
+const addBtn = document.querySelector('.addBtn');
+
+addBtn.addEventListener('click', () => {
+  collection.getBooks();
+  collection.addBook();
+  form.reset();
 });
+
+function timeDate() {
+  setInterval(() => {
+    time.innerHTML = new Date();
+  }, 100);
+}
+
+window.addEventListener('load', timeDate)
+
+navList.addEventListener('click', () => {
+  sectionList.style.display = 'block';
+  sectionAdd.style.display = 'none';
+  sectionContact.style.display = ' none';
+  pushItems();
+});
+
+navAdd.addEventListener('click', () => {
+  sectionList.style.display = 'none';
+  sectionAdd.style.display = 'block';
+  sectionContact.style.display = ' none';
+})
+
+navContact.addEventListener('click', () => {
+  sectionList.style.display = 'none';
+  sectionAdd.style.display = 'none';
+  sectionContact.style.display = ' flex';
+})
