@@ -67,7 +67,7 @@ ul {
 
 button {
   white-space: nowrap;
-  background-color: thistle;
+  background-color: rgb(236, 232, 236);
   border: 2px solid grey;
   outline: none;
   padding: 5px;
@@ -136,7 +136,6 @@ footer {
   position: absolute;
   margin: auto auto;
   border: 3px solid black;
-  display: flex;
   align-items: center;
   justify-content: center;
 }
