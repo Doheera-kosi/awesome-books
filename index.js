@@ -4,6 +4,7 @@ const bookAuthor = document.querySelector('#author');
 const newBook = document.querySelector('.newBook');
 const display = document.querySelector('.elements');
 const note = document.querySelector('#note');
+
 let dataArr = [
   {
     id: new Date().getTime().toString(),
@@ -11,6 +12,16 @@ let dataArr = [
     author: 'Charles Dickins',
   },
 ];
+
+// class Data {
+//   constructor(id, book, author) {
+//     this.id = id;
+//     this.book = book;
+//     this.author = author;
+//   }
+// }
+
+// const data = new Data();
 
 // Setting Data into LocalStorage Function
 function locStorage() {
