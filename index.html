@@ -9,16 +9,65 @@
   <title>Awesome Books</title>
 </head>
 <body>
-  <h1>All Awesome Books</h1>
-  <div class="elements">
+
+  <header>
+    <nav>
+      <p class="logo">Awesome Books</p>
+      <ul class="nav-button">
+        <li class="nav-items"><button type="button" id="nav-list">List <i class="fas fa-list"></i></button></li>
+        <li class="nav-items"><button type="button" id="nav-add">New <i class="fas fa-save"></i></button></li>
+        <li class="nav-items"><button type="button" id="nav-contact">Contact <i class="fas fa-file"></i></button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <p id="time" class="time"></p>
+    <section id="list">
+      <h1 class="header">All Awesome Books</h1>
+      <ul class="elements" id="elements">
+        <!-- Books -->
+      </ul>
+    </section>
+
+    <section id="add-book">
+      <h1 class="header">Add Some new books</h1> <br>
+      <form action="" id="form">
+        <label id="msg"></label>
+        <input type="text" id="title" placeholder="Book Title">
+        <input type="text" id="author" placeholder="Book Title">
+        <button class="addBtn">Add New <i class="fas fa-plus-circle"></i> </button>
+      </form>
+    </section>
+
+    <section id="contact">
+      <h1 class="header">Contact Information</h1>
+      <p class="contact-1">Do you have any question or you just want to say 'Hello'?</p>
+      <p class="contact-2">You can reach out to us via the below links</p>
+      <ol>
+        <li class="cli"><em>Our e-mail:</em> <u>mail@mail.com</u></li>
+        <li class="cli"><em>Phones:</em> <u>0043588765463</u></li>
+        <li class="cli"><em>Address:</em> <u>Streetname 22, 84503 City, Country</u></li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    <div class="f-container">
+      Copyright@2022
+    </div>
+  </footer>
+
+  <!-- <h1>All Awesome Books</h1> -->
+  <!-- <div class="elements"> -->
     <!-- Awesome Book -->
-  </div>
-  <hr class="hr">
-  <h3>Add New Book</h3>
-  <label for="msg" id="note"></label> <br>
-  <input type="text" id="name" placeholder="Book Title" required><br>
-  <input type="text" id="author" placeholder="Book Author" required> <br>
-  <button type="button" class="newBook">Add Book <i class="fas fa-plus-circle"></i></button>
+  <!-- </div> -->
+  <!-- <hr class="hr"> -->
+  <!-- <h3>Add New Book</h3> -->
+  <!-- <label for="msg" id="note"></label> <br> -->
+  <!-- <input type="text" id="name" placeholder="Book Title" required><br> -->
+  <!-- <input type="text" id="author" placeholder="Book Author" required> <br> -->
+  <!-- <button type="button" class="newBook">Add Book <i class="fas fa-plus-circle"></i></button> -->
   <script src="index.js"></script>
 </body>
 </html>
