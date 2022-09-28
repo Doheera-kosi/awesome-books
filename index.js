@@ -11,7 +11,6 @@ const sectionList = document.querySelector('#list');
 const sectionAdd = document.querySelector('#add-book');
 const sectionContact = document.querySelector('#contact');
 
-
 function pushItems() {
   let bookHtml = '';
   const booksArray = JSON.parse(localStorage.getItem('bookList'));
@@ -25,13 +24,22 @@ function pushItems() {
       `;
     });
     elements.innerHTML = bookHtml;
-  };
+  }
+}
+
+// Validating Input Fields Function
+const fieldValidation = () => {
+  if (bookName.value === '' || author.value === '') {
+    msg.innerHTML = 'Please fields can not be blank';
+  } else {
+    msg.innerHTML = 'Success!';
+  }
 };
 
 class Collection {
   constructor() {
-    this.arr = JSON.parse(localStorage.getItem('bookList'))
-  };
+    this.arr = JSON.parse(localStorage.getItem('bookList'));
+  }
 
   getBooks() {
     if (localStorage.getItem('bookList') === null) {
@@ -70,18 +78,9 @@ class Collection {
 
 const collection = new Collection();
 
-// Validating Input Fields Function
-const fieldValidation = () => {
-  if (bookName.value === '' || author.value === '') {
-    msg.innerHTML = 'Please fields can not be blank';
-  } else {
-    msg.innerHTML = 'Success!';
-  }
-};
-
 window.onload = () => {
   collection.getBooks();
-}
+};
 
 const addBtn = document.querySelector('.addBtn');
 
@@ -93,11 +92,12 @@ addBtn.addEventListener('click', () => {
 
 function timeDate() {
   setInterval(() => {
+    // eslint-disable-next-line no-undef
     time.innerHTML = new Date();
   }, 100);
 }
 
-window.addEventListener('load', timeDate)
+window.addEventListener('load', timeDate);
 
 navList.addEventListener('click', () => {
   sectionList.style.display = 'block';
@@ -110,10 +110,10 @@ navAdd.addEventListener('click', () => {
   sectionList.style.display = 'none';
   sectionAdd.style.display = 'block';
   sectionContact.style.display = ' none';
-})
+});
 
 navContact.addEventListener('click', () => {
   sectionList.style.display = 'none';
   sectionAdd.style.display = 'none';
   sectionContact.style.display = ' flex';
-})
+});
