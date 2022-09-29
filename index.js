@@ -111,9 +111,3 @@ navAdd.addEventListener('click', () => {
   sectionAdd.style.display = 'block';
   sectionContact.style.display = ' none';
 });
-
-navContact.addEventListener('click', () => {
-  sectionList.style.display = 'none';
-  sectionAdd.style.display = 'none';
-  sectionContact.style.display = ' flex';
-});
